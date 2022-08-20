@@ -1,4 +1,4 @@
-// ignore_for_file: depend_on_referenced_packages
+// ignore_for_file: depend_on_referenced_packages, avoid_print
 
 import 'dart:async';
 
@@ -15,7 +15,9 @@ class AuthProvider with ChangeNotifier {
   final String host = 'http://127.0.0.1';
   final FlutterSecureStorage storage = const FlutterSecureStorage();
   late String? token;
-  late Timer? timer;
+  Timer timer = Timer.periodic(const Duration(minutes: 60), (timer) {
+    print("ok");
+  });
   bool isLoading = false;
   bool? isLoggedin = true;
 
@@ -103,10 +105,10 @@ class AuthProvider with ChangeNotifier {
     isLoggedin = false;
     token = null;
     storage.delete(key: 'token');
-    if (timer != null) {
-      timer?.cancel();
-    }
+    timer.cancel();
   }
+
+  void signoutFingerprint() {}
 
   void initTimer() {
     timer = Timer.periodic(const Duration(minutes: 10), (timer) {

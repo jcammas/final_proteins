@@ -1,15 +1,11 @@
-// import 'package:flutter/cupertino.dart';
 // ignore_for_file: avoid_print, unused_local_variable
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:proteins_example/utils/palette.dart';
 import 'package:share_files_and_screenshot_widgets/share_files_and_screenshot_widgets.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 import 'package:proteins/controller/scenekit_plugin_controller_interface.dart';
-// import 'package:proteins_example/utils/config_theme.dart';
 
 class ScenekitPage extends StatefulWidget {
   final String? name;
@@ -71,7 +67,7 @@ class _ScenekitPageState extends State<ScenekitPage>
                 color: Colors.transparent,
                 child: Container(
                   decoration: const BoxDecoration(
-                    color: Colors.white,
+                    color: Color(0xFF292D39),
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(10.0),
                       topRight: Radius.circular(10.0),
@@ -89,7 +85,7 @@ class _ScenekitPageState extends State<ScenekitPage>
                             Row(
                               children: [
                                 const Icon(Icons.science_sharp,
-                                    size: 30, color: Color(0XFF434343)),
+                                    size: 30, color: Colors.white),
                                 SizedBox(
                                   width: screenWidth * 0.02,
                                 ),
@@ -98,7 +94,7 @@ class _ScenekitPageState extends State<ScenekitPage>
                                   style: const TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.w700,
-                                      color: Color(0XFF434343)),
+                                      color: Colors.white),
                                 ),
                               ],
                             ),
@@ -143,19 +139,560 @@ class _ScenekitPageState extends State<ScenekitPage>
                                 border: Border(
                                   top: BorderSide(
                                     color: Color(0xfff8f8f8),
-                                    width: 1,
+                                    width: 0,
                                   ),
                                 ),
                               ),
-                              child: const Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 25),
-                                child: Text(
-                                  "un peu de texte",
-                                  style: TextStyle(
-                                    color: Color(0XFF434343),
-                                    fontSize: 22,
-                                    fontWeight: FontWeight.w600,
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 25, vertical: 10),
+                                child: Row(
+                                  children: <Widget>[
+                                    const Icon(Icons.circle),
+                                    SizedBox(
+                                      width: screenWidth * 0.05,
+                                    ),
+                                    const Text(
+                                      "Hydrogen",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Container(
+                              decoration: const BoxDecoration(
+                                border: Border(
+                                  top: BorderSide(
+                                    color: Color(0xfff8f8f8),
+                                    width: 0,
                                   ),
+                                ),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 25, vertical: 10),
+                                child: Row(
+                                  children: [
+                                    const Icon(Icons.circle,
+                                        color: Colors.black),
+                                    SizedBox(
+                                      width: screenWidth * 0.05,
+                                    ),
+                                    const Text(
+                                      "Carbon",
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Container(
+                              decoration: const BoxDecoration(
+                                border: Border(
+                                  top: BorderSide(
+                                    color: Color(0xfff8f8f8),
+                                    width: 0,
+                                  ),
+                                ),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 25, vertical: 10),
+                                child: Row(
+                                  children: [
+                                    const Icon(
+                                      Icons.circle,
+                                      color: Color.fromARGB(255, 21, 5, 255),
+                                    ),
+                                    SizedBox(
+                                      width: screenWidth * 0.05,
+                                    ),
+                                    const Text(
+                                      "Nitrogen",
+                                      style: TextStyle(
+                                        color: Color.fromARGB(255, 21, 5, 255),
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Container(
+                              decoration: const BoxDecoration(
+                                border: Border(
+                                  top: BorderSide(
+                                    color: Color(0xfff8f8f8),
+                                    width: 0,
+                                  ),
+                                ),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 25, vertical: 10),
+                                child: Row(
+                                  children: [
+                                    const Icon(
+                                      Icons.circle,
+                                      color: Colors.red,
+                                    ),
+                                    SizedBox(
+                                      width: screenWidth * 0.05,
+                                    ),
+                                    const Text(
+                                      "Oxygen",
+                                      style: TextStyle(
+                                        color: Colors.red,
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Container(
+                              decoration: const BoxDecoration(
+                                border: Border(
+                                  top: BorderSide(
+                                    color: Color(0xfff8f8f8),
+                                    width: 0,
+                                  ),
+                                ),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 25, vertical: 10),
+                                child: Row(
+                                  children: [
+                                    const Icon(
+                                      Icons.circle,
+                                      color: Colors.green,
+                                    ),
+                                    SizedBox(
+                                      width: screenWidth * 0.05,
+                                    ),
+                                    const Text(
+                                      "Fluorine",
+                                      style: TextStyle(
+                                        color: Colors.green,
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Container(
+                              decoration: const BoxDecoration(
+                                border: Border(
+                                  top: BorderSide(
+                                    color: Color(0xfff8f8f8),
+                                    width: 0,
+                                  ),
+                                ),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 25, vertical: 10),
+                                child: Row(
+                                  children: [
+                                    const Icon(
+                                      Icons.circle,
+                                      color: Colors.green,
+                                    ),
+                                    SizedBox(
+                                      width: screenWidth * 0.05,
+                                    ),
+                                    const Text(
+                                      "Chlorine",
+                                      style: TextStyle(
+                                        color: Colors.green,
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Container(
+                              decoration: const BoxDecoration(
+                                border: Border(
+                                  top: BorderSide(
+                                    color: Color(0xfff8f8f8),
+                                    width: 0,
+                                  ),
+                                ),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 25, vertical: 10),
+                                child: Row(
+                                  children: [
+                                    const Icon(
+                                      Icons.circle,
+                                      color: Color.fromARGB(255, 62, 8, 72),
+                                    ),
+                                    SizedBox(
+                                      width: screenWidth * 0.05,
+                                    ),
+                                    const Text(
+                                      "Iodine",
+                                      style: TextStyle(
+                                        color: Color.fromARGB(255, 62, 8, 72),
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Container(
+                              decoration: const BoxDecoration(
+                                border: Border(
+                                  top: BorderSide(
+                                    color: Color(0xfff8f8f8),
+                                    width: 0,
+                                  ),
+                                ),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 25, vertical: 10),
+                                child: Row(
+                                  children: [
+                                    const Icon(
+                                      Icons.circle,
+                                      color: Color.fromARGB(255, 47, 11, 9),
+                                    ),
+                                    SizedBox(
+                                      width: screenWidth * 0.05,
+                                    ),
+                                    const Text(
+                                      "Bromine",
+                                      style: TextStyle(
+                                        color: Color.fromARGB(255, 47, 11, 9),
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Container(
+                              decoration: const BoxDecoration(
+                                border: Border(
+                                  top: BorderSide(
+                                    color: Color(0xfff8f8f8),
+                                    width: 0,
+                                  ),
+                                ),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 25, vertical: 10),
+                                child: Row(
+                                  children: [
+                                    const Icon(
+                                      Icons.circle,
+                                      color: Colors.cyan,
+                                    ),
+                                    SizedBox(
+                                      width: screenWidth * 0.05,
+                                    ),
+                                    const Flexible(
+                                      child: Text(
+                                        "Noble gases (He, Ne, Ar, Kr, Xe)",
+                                        style: TextStyle(
+                                          color: Colors.cyan,
+                                          fontSize: 22,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Container(
+                              decoration: const BoxDecoration(
+                                border: Border(
+                                  top: BorderSide(
+                                    color: Color(0xfff8f8f8),
+                                    width: 0,
+                                  ),
+                                ),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 25, vertical: 10),
+                                child: Row(
+                                  children: [
+                                    const Icon(
+                                      Icons.circle,
+                                      color: Colors.orange,
+                                    ),
+                                    SizedBox(
+                                      width: screenWidth * 0.05,
+                                    ),
+                                    const Text(
+                                      "Phosphorus",
+                                      style: TextStyle(
+                                        color: Colors.orange,
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Container(
+                              decoration: const BoxDecoration(
+                                border: Border(
+                                  top: BorderSide(
+                                    color: Color(0xfff8f8f8),
+                                    width: 0,
+                                  ),
+                                ),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 25, vertical: 10),
+                                child: Row(
+                                  children: [
+                                    const Icon(Icons.circle,
+                                        color: Colors.yellow),
+                                    SizedBox(
+                                      width: screenWidth * 0.05,
+                                    ),
+                                    const Text(
+                                      "Sulfur",
+                                      style: TextStyle(
+                                        color: Colors.yellow,
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Container(
+                              decoration: const BoxDecoration(
+                                border: Border(
+                                  top: BorderSide(
+                                    color: Color(0xfff8f8f8),
+                                    width: 0,
+                                  ),
+                                ),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 25, vertical: 10),
+                                child: Row(
+                                  children: [
+                                    const Icon(
+                                      Icons.circle,
+                                      color: Color.fromARGB(237, 217, 212, 171),
+                                    ),
+                                    SizedBox(
+                                      width: screenWidth * 0.05,
+                                    ),
+                                    const Text(
+                                      "Boron",
+                                      style: TextStyle(
+                                        color:
+                                            Color.fromARGB(237, 217, 212, 171),
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Container(
+                              decoration: const BoxDecoration(
+                                border: Border(
+                                  top: BorderSide(
+                                    color: Color(0xfff8f8f8),
+                                    width: 0,
+                                  ),
+                                ),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 25, vertical: 10),
+                                child: Row(
+                                  children: [
+                                    const Icon(
+                                      Icons.circle,
+                                      color: Colors.purple,
+                                    ),
+                                    SizedBox(
+                                      width: screenWidth * 0.05,
+                                    ),
+                                    const Flexible(
+                                      child: Text(
+                                        "Alkali metals (Li, Na, K, Rb, Cs, Fr)",
+                                        style: TextStyle(
+                                          color: Colors.purple,
+                                          fontSize: 22,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Container(
+                              decoration: const BoxDecoration(
+                                border: Border(
+                                  top: BorderSide(
+                                    color: Color(0xfff8f8f8),
+                                    width: 0,
+                                  ),
+                                ),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 25, vertical: 10),
+                                child: Row(
+                                  children: [
+                                    const Icon(
+                                      Icons.circle,
+                                      color: Color.fromARGB(255, 10, 66, 12),
+                                    ),
+                                    SizedBox(
+                                      width: screenWidth * 0.05,
+                                    ),
+                                    const Flexible(
+                                      child: Text(
+                                        "Alkaline earth metals (Be, Mg, Ca, Sr, Ba, Ra",
+                                        style: TextStyle(
+                                          color:
+                                              Color.fromARGB(255, 10, 66, 12),
+                                          fontSize: 22,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Container(
+                              decoration: const BoxDecoration(
+                                border: Border(
+                                  top: BorderSide(
+                                    color: Color(0xfff8f8f8),
+                                    width: 0,
+                                  ),
+                                ),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 25, vertical: 10),
+                                child: Row(
+                                  children: [
+                                    const Icon(
+                                      Icons.circle,
+                                      color: Colors.grey,
+                                    ),
+                                    SizedBox(
+                                      width: screenWidth * 0.05,
+                                    ),
+                                    const Text(
+                                      "Titanium",
+                                      style: TextStyle(
+                                        color: Colors.grey,
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Container(
+                              decoration: const BoxDecoration(
+                                border: Border(
+                                  top: BorderSide(
+                                    color: Color(0xfff8f8f8),
+                                    width: 0,
+                                  ),
+                                ),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 25, vertical: 10),
+                                child: Row(
+                                  children: [
+                                    const Icon(
+                                      Icons.circle,
+                                      color: Color.fromARGB(184, 186, 112, 0),
+                                    ),
+                                    SizedBox(
+                                      width: screenWidth * 0.05,
+                                    ),
+                                    const Text(
+                                      "Iron",
+                                      style: TextStyle(
+                                        color: Color.fromARGB(184, 186, 112, 0),
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Container(
+                              decoration: const BoxDecoration(
+                                border: Border(
+                                  top: BorderSide(
+                                    color: Color(0xfff8f8f8),
+                                    width: 0,
+                                  ),
+                                ),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 25, vertical: 10),
+                                child: Row(
+                                  children: [
+                                    const Icon(
+                                      Icons.circle,
+                                      color: Colors.pink,
+                                    ),
+                                    SizedBox(
+                                      width: screenWidth * 0.05,
+                                    ),
+                                    const Text(
+                                      "Other elements",
+                                      style: TextStyle(
+                                        color: Colors.pink,
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),
@@ -180,15 +717,6 @@ class _ScenekitPageState extends State<ScenekitPage>
       ).whenComplete(() => setState(() {}));
     }
 
-    ;
-
-    // void onInfosView(ScenekitController scenekitController) async {
-    //   this.scenekitController = scenekitController;
-    //   final version = await scenekitController.getPlatformVersion();
-
-    //   await scenekitController.createInfos(name: 'TOOTOTOTTOOTOTO');
-    // }
-
     void onScenekitViewCreated(ScenekitController scenekitController) async {
       this.scenekitController = scenekitController;
       final version = await scenekitController.getPlatformVersion();
@@ -202,7 +730,7 @@ class _ScenekitPageState extends State<ScenekitPage>
       appBar: AppBar(
         backgroundColor: createMaterialColor(const Color(0xFF292D39)),
         automaticallyImplyLeading: true,
-        title: const Text('Fluttery Gelatine'),
+        title: Text(widget.name!),
       ),
       body: isLoad == false
           ? const Center(
@@ -261,20 +789,26 @@ class _ScenekitPageState extends State<ScenekitPage>
                           },
                         ),
                       )
-                    : RawGestureDetector(
-                        gestures: {
-                          AllowMultipleGestureRecognizer:
-                              GestureRecognizerFactoryWithHandlers<
-                                  AllowMultipleGestureRecognizer>(
-                            () => AllowMultipleGestureRecognizer(),
-                            (AllowMultipleGestureRecognizer instance) {
-                              instance.onTap = () => _infosAtoms(context);
+                    : Center(
+                        child: SizedBox(
+                          width: screenWidth,
+                          height: screenHeight * 0.5,
+                          child: RawGestureDetector(
+                            gestures: {
+                              AllowMultipleGestureRecognizer:
+                                  GestureRecognizerFactoryWithHandlers<
+                                      AllowMultipleGestureRecognizer>(
+                                () => AllowMultipleGestureRecognizer(),
+                                (AllowMultipleGestureRecognizer instance) {
+                                  instance.onTap = () => _infosAtoms(context);
+                                },
+                              )
                             },
-                          )
-                        },
-                        child: ScenekitView(
-                          isAllowedToInteract: true,
-                          onScenekitViewCreated: onScenekitViewCreated,
+                            child: ScenekitView(
+                              isAllowedToInteract: true,
+                              onScenekitViewCreated: onScenekitViewCreated,
+                            ),
+                          ),
                         ),
                       ),
               ),

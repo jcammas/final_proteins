@@ -19,8 +19,6 @@ class ScenekitController {
             // final key = call.arguments;
             // print(key);
             // _callTapCallback();
-            createInfos(name: "TOOTOTOOTTOOTTOTOTOO");
-            isTap = true;
             break;
           }
       }
@@ -41,13 +39,6 @@ class ScenekitController {
     return version;
   }
 
-  Future<void> createInfos({
-    String? name,
-  }) async {
-    Widget displayInfo =
-        Text(name!, style: TextStyle(fontSize: 150, color: Colors.red));
-  }
-
   Future<void> createAtoms({
     double? initialScale,
     int? backgroundColor,
@@ -61,13 +52,5 @@ class ScenekitController {
         "name": name,
       },
     );
-  }
-
-  void _callTapCallback() {
-    // final widgetModel = widgetModels.firstWhereOrNull(
-    //   (element) => element.key == key,
-    // );
-
-    // widgetModel?.onWidgetTap?.call();
   }
 }

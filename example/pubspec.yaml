@@ -33,6 +33,7 @@ dependencies:
   get: ^4.6.5
   mongo_dart: ^0.7.4+1
   flutter_secure_storage: ^5.0.2
+  localstorage: ^4.0.0+1
   hive: ^2.2.3
   provider: ^6.0.3
   hive_flutter: ^1.1.0
@@ -42,6 +43,7 @@ dependencies:
   pixel_color_picker: ^1.0.0
   image_pixels: ^3.0.0
   flutter_processing: ^0.2.0
+  local_auth: ^2.1.2
 
 dev_dependencies:
   flutter_test:

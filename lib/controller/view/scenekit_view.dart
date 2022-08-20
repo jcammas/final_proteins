@@ -35,7 +35,6 @@ class _ScenekitViewState extends State<ScenekitView> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => print("bah alors chef"),
       onVerticalDragStart: (DragStartDetails details) {},
       child: SizedBox(
         width: MediaQuery.of(context).size.width,

@@ -1,9 +1,12 @@
-// ignore_for_file: unused_local_variable, use_build_context_synchronously
-
+// ignore_for_file: unused_local_variable, use_build_context_synchronously, avoid_print, dead_code, unused_field
+import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:local_auth/local_auth.dart';
 import 'package:proteins_example/models/signin_form_model.dart';
 import 'package:proteins_example/models/user_model.dart';
 import 'package:proteins_example/providers/auth_provider.dart';
+import 'package:localstorage/localstorage.dart';
 import 'package:proteins_example/providers/user_provider.dart';
 import 'package:proteins_example/views/auth/signup_view.dart';
 import 'package:proteins_example/views/home/home.dart';
@@ -22,25 +25,17 @@ class LoginViewController extends StatefulWidget {
 
 class _LoginViewControllerState extends State<LoginViewController> {
   final GlobalKey<FormState> key = GlobalKey<FormState>();
+  bool isAuth = false;
   late SigninForm signinForm;
   FormState? get form => key.currentState;
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   bool hidePassword = true;
   String error = "";
-
-  @override
-  void initState() {
-    signinForm = SigninForm(email: '', password: '');
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (mounted) {
-        currentTheme.addListener(() {
-          setState(() {});
-        });
-      }
-    });
-  }
+  final LocalAuthentication auth = LocalAuthentication();
+  _SupportState _supportState = _SupportState.unknown;
+  String _authorized = 'Not Authorized';
+  bool _isAuthenticating = false;
 
   Future<void> submitForm() async {
     if (form!.validate()) {
@@ -59,11 +54,70 @@ class _LoginViewControllerState extends State<LoginViewController> {
   }
 
   @override
+  void initState() {
+    signinForm = SigninForm(email: '', password: '');
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) {
+        currentTheme.addListener(() {
+          setState(() {});
+        });
+      }
+    });
+    auth.isDeviceSupported().then(
+          (bool isSupported) => setState(() => _supportState = isSupported
+              ? _SupportState.supported
+              : _SupportState.unsupported),
+        );
+  }
+
+  Future<void> _authenticateWithBiometrics() async {
+    bool authenticated = false;
+    try {
+      setState(() {
+        _isAuthenticating = true;
+        _authorized = 'Authenticating';
+      });
+      authenticated = await auth.authenticate(
+        localizedReason:
+            'Scan your fingerprint (or face or whatever) to authenticate',
+        options: const AuthenticationOptions(
+          stickyAuth: true,
+          biometricOnly: true,
+        ),
+      );
+      if (authenticated == true) {
+        final LocalStorage storage = LocalStorage('client_info');
+        storage.ready.then((_) async {
+          await storage.setItem("client", {"id": 1});
+          if (storage.getItem("client")["id"] != null) {
+            // print(storage.getItem("client")["id"]);
+            Navigator.pushNamed(context, HomeViewController.routename);
+          }
+        });
+      } else {}
+      setState(() {
+        _isAuthenticating = false;
+        _authorized = 'Authenticating';
+      });
+    } on PlatformException catch (e) {
+      print(e);
+      setState(() {
+        _isAuthenticating = false;
+        _authorized = 'Error - ${e.message}';
+      });
+      return;
+    }
+    if (!mounted) {
+      return;
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     bool isthisDarkMode = box.get('currentTheme');
-    //print(isthisDarkMode);
 
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
@@ -91,11 +145,11 @@ class _LoginViewControllerState extends State<LoginViewController> {
           ],
         ),
         body: SingleChildScrollView(
-            child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-              SizedBox(height: MediaQuery.of(context).size.height * 0.04),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              SizedBox(height: MediaQuery.of(context).size.height * 0.02),
               Container(
                 padding: const EdgeInsets.all(10),
                 child: SizedBox(
@@ -107,7 +161,7 @@ class _LoginViewControllerState extends State<LoginViewController> {
                   ),
                 ),
               ),
-              SizedBox(height: MediaQuery.of(context).size.height * 0.04),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.02),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 30),
                 child: Card(
@@ -292,7 +346,7 @@ class _LoginViewControllerState extends State<LoginViewController> {
                             ),
                             SizedBox(
                                 height:
-                                    MediaQuery.of(context).size.height * 0.002),
+                                    MediaQuery.of(context).size.height * 0.004),
                           ],
                         ),
                       ),
@@ -300,8 +354,34 @@ class _LoginViewControllerState extends State<LoginViewController> {
                   ),
                 ),
               ),
-            ])),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.04),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(7.0),
+                    ),
+                    primary: Colors.transparent,
+                    elevation: 0.0),
+                onPressed: _authenticateWithBiometrics,
+                child: const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Icon(
+                    Icons.fingerprint,
+                    color: Colors.red,
+                    size: 50,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
+}
+
+enum _SupportState {
+  unknown,
+  supported,
+  unsupported,
 }

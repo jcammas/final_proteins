@@ -1,6 +1,7 @@
 // ignore_for_file: unused_local_variable, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:localstorage/localstorage.dart';
 import 'package:proteins_example/providers/auth_provider.dart';
 import 'package:proteins_example/views/auth/login_view.dart';
 import 'package:proteins_example/views/sceneKit/scene_kit_page.dart';
@@ -1272,6 +1273,7 @@ class _HomeViewControllerState extends State<HomeViewController>
   void initState() {
     super.initState();
     _foundProteins = _allProteins;
+    // updateLocalStorage();
     WidgetsBinding.instance.addObserver(this);
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -1291,6 +1293,7 @@ class _HomeViewControllerState extends State<HomeViewController>
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
+    final LocalStorage storage = LocalStorage('client_info');
     super.didChangeAppLifecycleState(state);
 
     if (state.name == "paused") {
@@ -1316,9 +1319,12 @@ class _HomeViewControllerState extends State<HomeViewController>
 
   @override
   Widget build(BuildContext context) {
+    final LocalStorage storage = LocalStorage('client_info');
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     bool isthisDarkMode = box.get('currentTheme');
+
+    // print(storage.getItem("client")["id"]);
 
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
@@ -1352,6 +1358,7 @@ class _HomeViewControllerState extends State<HomeViewController>
                   ),
                 ),
                 onTap: () {
+                  final LocalStorage storage = LocalStorage('client_info');
                   Provider.of<AuthProvider>(context, listen: false).signout();
                   Navigator.pushNamed(context, LoginViewController.routename);
                 },

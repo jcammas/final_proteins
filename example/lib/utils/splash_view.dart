@@ -3,7 +3,6 @@ import 'package:flutter/scheduler.dart';
 import 'package:proteins_example/providers/auth_provider.dart';
 import 'package:proteins_example/utils/palette.dart';
 import 'package:proteins_example/views/auth/login_view.dart';
-// import 'package:proteins_example/views/auth/login_view.dart';
 import 'package:proteins_example/views/home/home.dart';
 import 'package:provider/provider.dart';
 
@@ -28,7 +27,7 @@ class _SplashViewState extends State<SplashView> {
           SchedulerBinding.instance.addPostFrameCallback((_) {
             if (isLogggedin == false) {
               Navigator.pushReplacementNamed(
-                  context, HomeViewController.routename);
+                  context, LoginViewController.routename);
             } else if (isLogggedin == true) {
               Navigator.pushReplacementNamed(
                   context, HomeViewController.routename);
