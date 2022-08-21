@@ -1415,7 +1415,7 @@ class _HomeViewControllerState extends State<HomeViewController>
                               maxWidth: screenWidth * 0.1,
                               maxHeight: screenHeight * 0.1,
                             ),
-                            child: Image.asset('assets/images/logodark.png',
+                            child: Image.asset('assets/icon/icon.png',
                                 fit: BoxFit.cover),
                           ),
                           title: Text(_foundProteins[index]['id'],
