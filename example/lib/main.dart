@@ -117,7 +117,10 @@ class _MyAppState extends State<MyApp> {
           } else if (settings.name == Register.routeName) {
             return MaterialPageRoute(builder: (_) => const Register());
           } else if (settings.name == ScenekitPage.routename) {
-            return MaterialPageRoute(builder: (_) => const ScenekitPage());
+            return MaterialPageRoute(
+                builder: (_) => const ScenekitPage(
+                      name: "",
+                    ));
           } else {
             return null;
           }

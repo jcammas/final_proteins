@@ -1,10 +1,14 @@
 PODS:
   - Flutter (1.0.0)
+  - flutter_native_screenshot (0.0.1):
+    - Flutter
   - flutter_secure_storage (3.3.1):
     - Flutter
   - local_auth_ios (0.0.1):
     - Flutter
   - path_provider_ios (0.0.1):
+    - Flutter
+  - permission_handler_apple (9.0.4):
     - Flutter
   - proteins (0.0.1):
     - Flutter
@@ -13,21 +17,27 @@ PODS:
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
+  - flutter_native_screenshot (from `.symlinks/plugins/flutter_native_screenshot/ios`)
   - flutter_secure_storage (from `.symlinks/plugins/flutter_secure_storage/ios`)
   - local_auth_ios (from `.symlinks/plugins/local_auth_ios/ios`)
   - path_provider_ios (from `.symlinks/plugins/path_provider_ios/ios`)
+  - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
   - proteins (from `.symlinks/plugins/proteins/ios`)
   - share_files_and_screenshot_widgets (from `.symlinks/plugins/share_files_and_screenshot_widgets/ios`)
 
 EXTERNAL SOURCES:
   Flutter:
     :path: Flutter
+  flutter_native_screenshot:
+    :path: ".symlinks/plugins/flutter_native_screenshot/ios"
   flutter_secure_storage:
     :path: ".symlinks/plugins/flutter_secure_storage/ios"
   local_auth_ios:
     :path: ".symlinks/plugins/local_auth_ios/ios"
   path_provider_ios:
     :path: ".symlinks/plugins/path_provider_ios/ios"
+  permission_handler_apple:
+    :path: ".symlinks/plugins/permission_handler_apple/ios"
   proteins:
     :path: ".symlinks/plugins/proteins/ios"
   share_files_and_screenshot_widgets:
@@ -35,9 +45,11 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
+  flutter_native_screenshot: 9f85755d0bcc31a774aaa45c0bc3fada210f001a
   flutter_secure_storage: 7953c38a04c3fdbb00571bcd87d8e3b5ceb9daec
   local_auth_ios: 0d333dde7780f669e66f19d2ff6005f3ea84008d
   path_provider_ios: 14f3d2fd28c4fdb42f44e0f751d12861c43cee02
+  permission_handler_apple: 44366e37eaf29454a1e7b1b7d736c2cceaeb17ce
   proteins: bc0d63658057bdf86afc0d6924ec703c4e49e5cf
   share_files_and_screenshot_widgets: 11063d06810f086eade3c1170946f8599e276adb
 

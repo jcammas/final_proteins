@@ -355,23 +355,34 @@ class _LoginViewControllerState extends State<LoginViewController> {
                 ),
               ),
               SizedBox(height: MediaQuery.of(context).size.height * 0.04),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(7.0),
+              if (_supportState == _SupportState.unknown)
+                const CircularProgressIndicator()
+              else if (_supportState == _SupportState.supported)
+                Column(
+                  children: [
+                    const Text('This device is supported'),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(7.0),
+                          ),
+                          primary: Colors.transparent,
+                          elevation: 0.0),
+                      onPressed: _authenticateWithBiometrics,
+                      child: const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Icon(
+                          Icons.fingerprint,
+                          color: Colors.red,
+                          size: 50,
+                        ),
+                      ),
                     ),
-                    primary: Colors.transparent,
-                    elevation: 0.0),
-                onPressed: _authenticateWithBiometrics,
-                child: const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Icon(
-                    Icons.fingerprint,
-                    color: Colors.red,
-                    size: 50,
-                  ),
-                ),
-              ),
+                  ],
+                )
+              else
+                const Text('This device is not supported'),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.04),
             ],
           ),
         ),

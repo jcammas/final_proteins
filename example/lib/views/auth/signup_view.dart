@@ -130,326 +130,340 @@ class _RegisterState extends State<Register> {
             ],
           ),
           // backgroundColor: Colors.blueGrey,
-          body: Column(
-            children: <Widget>[
-              SizedBox(height: MediaQuery.of(context).size.height * 0.04),
-              Container(
-                padding: const EdgeInsets.all(10),
-                child: SizedBox(
-                  width: screenWidth * 0.5,
-                  child: Image.asset(
-                    isthisDarkMode
-                        ? 'assets/images/logodark.png'
-                        : 'assets/images/logolight.png',
+          body: SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                SizedBox(height: MediaQuery.of(context).size.height * 0.04),
+                Container(
+                  padding: const EdgeInsets.all(10),
+                  child: SizedBox(
+                    width: screenWidth * 0.5,
+                    child: Image.asset(
+                      isthisDarkMode
+                          ? 'assets/images/logodark.png'
+                          : 'assets/images/logolight.png',
+                    ),
                   ),
                 ),
-              ),
-              SizedBox(height: MediaQuery.of(context).size.height * 0.04),
-              Padding(
-                padding: const EdgeInsets.only(top: 0.0),
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.all(10),
-                        child: Card(
-                          shadowColor: Colors.grey[200],
-                          //color: Colors.white,
-                          margin: const EdgeInsets.all(10),
-                          shape: RoundedRectangleBorder(
-                            side: const BorderSide(
-                                color: Color(0xFFD0D0D0), width: 1.0),
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          clipBehavior: Clip.antiAlias,
-                          child: Column(
-                            children: <Widget>[
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Expanded(
-                                    child: Padding(
-                                      padding: EdgeInsets.only(
-                                          top: screenHeight * 0.02,
-                                          bottom: screenHeight * 0.000,
-                                          left: screenWidth * 0.00,
-                                          right: screenWidth * 0.00),
-                                      child: Column(
-                                        children: const [
-                                          Text(
-                                            "Créer mon compte",
-                                            style: TextStyle(
-                                              //color: Color(0XFF434343),
-                                              fontSize: 22,
-                                              fontWeight: FontWeight.w600,
-                                            ),
-                                            textAlign: TextAlign.center,
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                  height: MediaQuery.of(context).size.height *
-                                      0.01),
-                              Form(
-                                key: key,
-                                child: Column(
-                                  children: <Widget>[
-                                    SizedBox(
-                                      height:
-                                          MediaQuery.of(context).size.height *
-                                              0.015,
-                                    ),
-                                    SizedBox(
-                                      height:
-                                          MediaQuery.of(context).size.height *
-                                              0.06,
-                                      child: ListTile(
-                                          contentPadding:
-                                              const EdgeInsets.symmetric(
-                                                  horizontal: 30, vertical: 0),
-                                          title: TextFormField(
-                                            controller: nameController,
-                                            obscureText: false,
-                                            decoration: const InputDecoration(
-                                              labelText: "Nom d'utilisateur",
-                                              border: OutlineInputBorder(
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(7)),
+                SizedBox(height: MediaQuery.of(context).size.height * 0.04),
+                Padding(
+                  padding: const EdgeInsets.only(top: 0.0),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(10),
+                          child: Card(
+                            shadowColor: Colors.grey[200],
+                            //color: Colors.white,
+                            margin: const EdgeInsets.all(10),
+                            shape: RoundedRectangleBorder(
+                              side: const BorderSide(
+                                  color: Color(0xFFD0D0D0), width: 1.0),
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            clipBehavior: Clip.antiAlias,
+                            child: Column(
+                              children: <Widget>[
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Expanded(
+                                      child: Padding(
+                                        padding: EdgeInsets.only(
+                                            top: screenHeight * 0.02,
+                                            bottom: screenHeight * 0.000,
+                                            left: screenWidth * 0.00,
+                                            right: screenWidth * 0.00),
+                                        child: Column(
+                                          children: const [
+                                            Text(
+                                              "Créer mon compte",
+                                              style: TextStyle(
+                                                //color: Color(0XFF434343),
+                                                fontSize: 22,
+                                                fontWeight: FontWeight.w600,
                                               ),
+                                              textAlign: TextAlign.center,
                                             ),
-                                            onChanged: (value) {
-                                              setState(() {
-                                                error = "";
-                                              });
-                                            },
-                                            onSaved: (newValue) {
-                                              signupForm.username = newValue!;
-                                            },
-                                            textInputAction:
-                                                TextInputAction.next,
-                                          )),
-                                    ),
-                                    SizedBox(
-                                      height:
-                                          MediaQuery.of(context).size.height *
-                                              0.02,
-                                    ),
-                                    SizedBox(
-                                      height:
-                                          MediaQuery.of(context).size.height *
-                                              0.06,
-                                      child: ListTile(
-                                          contentPadding:
-                                              const EdgeInsets.symmetric(
-                                                  horizontal: 30, vertical: 0),
-                                          title: TextFormField(
-                                            controller: mailController,
-                                            keyboardType:
-                                                TextInputType.emailAddress,
-                                            obscureText: false,
-                                            decoration: const InputDecoration(
-                                              labelText: 'Email',
-                                              border: OutlineInputBorder(
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(7)),
-                                              ),
-                                            ),
-                                            onChanged: (value) {
-                                              setState(() {
-                                                error = "";
-                                              });
-                                            },
-                                            onSaved: (newValue) {
-                                              signupForm.email = newValue!;
-                                            },
-                                            textInputAction:
-                                                TextInputAction.next,
-                                          )),
-                                    ),
-                                    SizedBox(
-                                      height:
-                                          MediaQuery.of(context).size.height *
-                                              0.015,
-                                    ),
-                                    SizedBox(
-                                      height:
-                                          MediaQuery.of(context).size.height *
-                                              0.06,
-                                      child: ListTile(
-                                        contentPadding:
-                                            const EdgeInsets.symmetric(
-                                                horizontal: 30, vertical: 0),
-                                        title: TextFormField(
-                                          controller: passwordController,
-                                          obscureText: hidePassword == true
-                                              ? true
-                                              : false,
-                                          decoration: InputDecoration(
-                                            labelText: 'Mot de passe',
-                                            border: const OutlineInputBorder(
-                                              borderRadius: BorderRadius.all(
-                                                Radius.circular(7),
-                                              ),
-                                            ),
-                                            suffixIcon: IconButton(
-                                              onPressed: () {
-                                                setState(() {
-                                                  hidePassword = !hidePassword;
-                                                });
-                                              },
-                                              icon: hidePassword == true
-                                                  ? const Icon(
-                                                      Icons.visibility,
-                                                      color: Color(0xFF4078bf),
-                                                    )
-                                                  : const Icon(
-                                                      Icons.visibility,
-                                                      color: Colors.red,
-                                                    ),
-                                            ),
-                                          ),
-                                          onSaved: (newValue) {
-                                            signupForm.password = newValue!;
-                                          },
-                                          textInputAction: TextInputAction.next,
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height:
-                                          MediaQuery.of(context).size.height *
-                                              0.015,
-                                    ),
-                                    SizedBox(
-                                      height:
-                                          MediaQuery.of(context).size.height *
-                                              0.06,
-                                      child: ListTile(
-                                        contentPadding:
-                                            const EdgeInsets.symmetric(
-                                                horizontal: 30, vertical: 0),
-                                        title: TextFormField(
-                                          controller: repeatPasswordController,
-                                          obscureText: hidePassword == true
-                                              ? true
-                                              : false,
-                                          decoration: InputDecoration(
-                                            labelText: 'Confirmer mot de passe',
-                                            border: const OutlineInputBorder(
-                                              borderRadius: BorderRadius.all(
-                                                Radius.circular(7),
-                                              ),
-                                            ),
-                                            suffixIcon: IconButton(
-                                              onPressed: () {
-                                                setState(() {
-                                                  hidePassword = !hidePassword;
-                                                });
-                                              },
-                                              icon: hidePassword == true
-                                                  ? const Icon(
-                                                      Icons.visibility,
-                                                      color: Color(0xFF4078bf),
-                                                    )
-                                                  : const Icon(
-                                                      Icons.visibility,
-                                                      color: Colors.red,
-                                                    ),
-                                            ),
-                                          ),
-                                          onChanged: (value) {
-                                            setState(() {
-                                              error = "";
-                                            });
-                                          },
-                                          onSaved: (newValue) {
-                                            signupForm.password = newValue!;
-                                          },
-                                          textInputAction: TextInputAction.next,
+                                          ],
                                         ),
                                       ),
                                     ),
                                   ],
                                 ),
-                              ),
-                              SizedBox(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.015,
-                              ),
-                              ButtonBar(
-                                alignment: MainAxisAlignment.center,
-                                children: [
-                                  ElevatedButton(
-                                    onPressed: () {
-                                      if (mailController.text == "") {
-                                        setState(() {
-                                          error =
-                                              "Veuillez rentrer votre adresse mail.";
-                                        });
-                                        return;
-                                      }
-
-                                      if ((passwordController.text == "") ||
-                                          (repeatPasswordController.text ==
-                                              "")) {
-                                        setState(() {
-                                          error =
-                                              "Veuillez rentrer votre mot de passe.";
-                                        });
-                                        return;
-                                      }
-                                      if (passwordController.text !=
-                                          repeatPasswordController.text) {
-                                        setState(() {
-                                          error =
-                                              "Les mots de passe ne sont pas égaux.";
-                                        });
-                                        return;
-                                      }
-
-                                      try {
-                                        submitForm();
-                                      } catch (e) {
-                                        rethrow;
-                                      }
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(7.0),
+                                SizedBox(
+                                    height: MediaQuery.of(context).size.height *
+                                        0.01),
+                                Form(
+                                  key: key,
+                                  child: Column(
+                                    children: <Widget>[
+                                      SizedBox(
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.015,
                                       ),
-                                      elevation: 0.0,
-                                      primary: const Color(0xFF4078bf),
-                                    ),
-                                    child: Text(
-                                      'Créer mon compte'.toUpperCase(),
-                                      style: const TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold,
+                                      SizedBox(
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.06,
+                                        child: ListTile(
+                                            contentPadding:
+                                                const EdgeInsets.symmetric(
+                                                    horizontal: 30,
+                                                    vertical: 0),
+                                            title: TextFormField(
+                                              controller: nameController,
+                                              obscureText: false,
+                                              decoration: const InputDecoration(
+                                                labelText: "Nom d'utilisateur",
+                                                border: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(7)),
+                                                ),
+                                              ),
+                                              onChanged: (value) {
+                                                setState(() {
+                                                  error = "";
+                                                });
+                                              },
+                                              onSaved: (newValue) {
+                                                signupForm.username = newValue!;
+                                              },
+                                              textInputAction:
+                                                  TextInputAction.next,
+                                            )),
                                       ),
-                                    ),
+                                      SizedBox(
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.02,
+                                      ),
+                                      SizedBox(
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.06,
+                                        child: ListTile(
+                                            contentPadding:
+                                                const EdgeInsets.symmetric(
+                                                    horizontal: 30,
+                                                    vertical: 0),
+                                            title: TextFormField(
+                                              controller: mailController,
+                                              keyboardType:
+                                                  TextInputType.emailAddress,
+                                              obscureText: false,
+                                              decoration: const InputDecoration(
+                                                labelText: 'Email',
+                                                border: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(7)),
+                                                ),
+                                              ),
+                                              onChanged: (value) {
+                                                setState(() {
+                                                  error = "";
+                                                });
+                                              },
+                                              onSaved: (newValue) {
+                                                signupForm.email = newValue!;
+                                              },
+                                              textInputAction:
+                                                  TextInputAction.next,
+                                            )),
+                                      ),
+                                      SizedBox(
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.015,
+                                      ),
+                                      SizedBox(
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.06,
+                                        child: ListTile(
+                                          contentPadding:
+                                              const EdgeInsets.symmetric(
+                                                  horizontal: 30, vertical: 0),
+                                          title: TextFormField(
+                                            controller: passwordController,
+                                            obscureText: hidePassword == true
+                                                ? true
+                                                : false,
+                                            decoration: InputDecoration(
+                                              labelText: 'Mot de passe',
+                                              border: const OutlineInputBorder(
+                                                borderRadius: BorderRadius.all(
+                                                  Radius.circular(7),
+                                                ),
+                                              ),
+                                              suffixIcon: IconButton(
+                                                onPressed: () {
+                                                  setState(() {
+                                                    hidePassword =
+                                                        !hidePassword;
+                                                  });
+                                                },
+                                                icon: hidePassword == true
+                                                    ? const Icon(
+                                                        Icons.visibility,
+                                                        color:
+                                                            Color(0xFF4078bf),
+                                                      )
+                                                    : const Icon(
+                                                        Icons.visibility,
+                                                        color: Colors.red,
+                                                      ),
+                                              ),
+                                            ),
+                                            onSaved: (newValue) {
+                                              signupForm.password = newValue!;
+                                            },
+                                            textInputAction:
+                                                TextInputAction.next,
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.015,
+                                      ),
+                                      SizedBox(
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.06,
+                                        child: ListTile(
+                                          contentPadding:
+                                              const EdgeInsets.symmetric(
+                                                  horizontal: 30, vertical: 0),
+                                          title: TextFormField(
+                                            controller:
+                                                repeatPasswordController,
+                                            obscureText: hidePassword == true
+                                                ? true
+                                                : false,
+                                            decoration: InputDecoration(
+                                              labelText:
+                                                  'Confirmer mot de passe',
+                                              border: const OutlineInputBorder(
+                                                borderRadius: BorderRadius.all(
+                                                  Radius.circular(7),
+                                                ),
+                                              ),
+                                              suffixIcon: IconButton(
+                                                onPressed: () {
+                                                  setState(() {
+                                                    hidePassword =
+                                                        !hidePassword;
+                                                  });
+                                                },
+                                                icon: hidePassword == true
+                                                    ? const Icon(
+                                                        Icons.visibility,
+                                                        color:
+                                                            Color(0xFF4078bf),
+                                                      )
+                                                    : const Icon(
+                                                        Icons.visibility,
+                                                        color: Colors.red,
+                                                      ),
+                                              ),
+                                            ),
+                                            onChanged: (value) {
+                                              setState(() {
+                                                error = "";
+                                              });
+                                            },
+                                            onSaved: (newValue) {
+                                              signupForm.password = newValue!;
+                                            },
+                                            textInputAction:
+                                                TextInputAction.next,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                ],
-                              ),
-                              SizedBox(
-                                height: screenHeight * 0.015,
-                              )
-                            ],
+                                ),
+                                SizedBox(
+                                  height: MediaQuery.of(context).size.height *
+                                      0.015,
+                                ),
+                                ButtonBar(
+                                  alignment: MainAxisAlignment.center,
+                                  children: [
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        if (mailController.text == "") {
+                                          setState(() {
+                                            error =
+                                                "Veuillez rentrer votre adresse mail.";
+                                          });
+                                          return;
+                                        }
+
+                                        if ((passwordController.text == "") ||
+                                            (repeatPasswordController.text ==
+                                                "")) {
+                                          setState(() {
+                                            error =
+                                                "Veuillez rentrer votre mot de passe.";
+                                          });
+                                          return;
+                                        }
+                                        if (passwordController.text !=
+                                            repeatPasswordController.text) {
+                                          setState(() {
+                                            error =
+                                                "Les mots de passe ne sont pas égaux.";
+                                          });
+                                          return;
+                                        }
+
+                                        try {
+                                          submitForm();
+                                        } catch (e) {
+                                          rethrow;
+                                        }
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(7.0),
+                                        ),
+                                        elevation: 0.0,
+                                        primary: const Color(0xFF4078bf),
+                                      ),
+                                      child: Text(
+                                        'Créer mon compte'.toUpperCase(),
+                                        style: const TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: screenHeight * 0.015,
+                                )
+                              ],
+                            ),
                           ),
-                        ),
-                      )
-                    ],
+                        )
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           )),
     );
   }

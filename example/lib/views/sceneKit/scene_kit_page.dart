@@ -1,17 +1,22 @@
-// ignore_for_file: avoid_print, unused_local_variable
+// ignore_for_file: avoid_print, unused_local_variable, depend_on_referenced_packages
+
+import 'dart:io';
+// import 'dart:typed_data';
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:proteins_example/utils/palette.dart';
-import 'package:share_files_and_screenshot_widgets/share_files_and_screenshot_widgets.dart';
+// import 'package:share_files_and_screenshot_widgets/share_files_and_screenshot_widgets.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 import 'package:proteins/controller/scenekit_plugin_controller_interface.dart';
+import 'package:flutter_native_screenshot/flutter_native_screenshot.dart';
+// import 'package:permission_handler/permission_handler.dart';
 
 class ScenekitPage extends StatefulWidget {
-  final String? name;
+  final String name;
   const ScenekitPage({
     Key? key,
-    this.name,
+    required this.name,
   }) : super(key: key);
 
   static const String routename = '/sceneKit';
@@ -27,10 +32,49 @@ class _ScenekitPageState extends State<ScenekitPage>
   int originalSize = 800;
   int customViewOpen = 0;
   bool isLoad = false;
+  late Widget? _imgHolder;
+
+  void showSnackBar(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+      ),
+    );
+  }
+
+  void _showSnackBar(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+      ),
+    );
+  }
+
+  void _doTakeScreenshot() async {
+    try {
+      String? path = await FlutterNativeScreenshot.takeScreenshot();
+      debugPrint('Screenshot taken, path: $path');
+      if (path == null || path.isEmpty) {
+        _showSnackBar('Error taking the screenshot :(');
+        return;
+      } // if error
+      _showSnackBar(
+          'Ce screenshot a été sauvegardé dans vos photos, vous pouvez le partager !');
+      File imgFile = File(path);
+      _imgHolder = Image.file(imgFile);
+      setState(() {});
+    } catch (e) {
+      print("non mais ça va pas la tête ????");
+    }
+  }
 
   @override
   void initState() {
     super.initState();
+    _imgHolder = const Center(
+      child: Icon(Icons.image),
+    );
+
     Future.delayed(
         const Duration(seconds: 1),
         () => setState(() {
@@ -730,7 +774,7 @@ class _ScenekitPageState extends State<ScenekitPage>
       appBar: AppBar(
         backgroundColor: createMaterialColor(const Color(0xFF292D39)),
         automaticallyImplyLeading: true,
-        title: Text(widget.name!),
+        title: Text(widget.name),
       ),
       body: isLoad == false
           ? const Center(
@@ -738,80 +782,76 @@ class _ScenekitPageState extends State<ScenekitPage>
                 color: Colors.white,
               ),
             )
-          : RepaintBoundary(
-              key: previewContainer,
-              child: SizedBox(
-                child: customViewOpen == 0
-                    ? Center(
-                        child: Image(
-                          width: MediaQuery.of(context).size.width,
-                          height: MediaQuery.of(context).size.height,
-                          image: Svg(
-                            'https://cdn.rcsb.org/images/ccd/labeled/${widget.name![0]}/${widget.name}.svg',
-                            source: SvgSource.network,
-                          ),
-                          errorBuilder: (BuildContext context, Object exception,
-                              StackTrace? stackTrace) {
-                            return Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                SizedBox(
-                                  height: 1,
-                                  width: 1,
-                                  child: ScenekitView(
-                                    isAllowedToInteract: true,
-                                    onScenekitViewCreated:
-                                        onScenekitViewCreated,
-                                  ),
-                                ),
-                                Center(
-                                  child: AlertDialog(
-                                    title: const Text('⚠️'),
-                                    content: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: const <Widget>[
-                                        Text(
-                                          "Cette protéine n'est pas disponible 😢",
-                                          style: TextStyle(
-                                            fontSize: 18,
-                                            color: Colors.white,
-                                          ),
-                                          textAlign: TextAlign.center,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            );
-                          },
+          : SizedBox(
+              child: customViewOpen == 0
+                  ? Center(
+                      child: Image(
+                        width: MediaQuery.of(context).size.width,
+                        height: MediaQuery.of(context).size.height,
+                        image: Svg(
+                          'https://cdn.rcsb.org/images/ccd/labeled/${widget.name[0]}/${widget.name}.svg',
+                          source: SvgSource.network,
                         ),
-                      )
-                    : Center(
-                        child: SizedBox(
-                          width: screenWidth,
-                          height: screenHeight * 0.5,
-                          child: RawGestureDetector(
-                            gestures: {
-                              AllowMultipleGestureRecognizer:
-                                  GestureRecognizerFactoryWithHandlers<
-                                      AllowMultipleGestureRecognizer>(
-                                () => AllowMultipleGestureRecognizer(),
-                                (AllowMultipleGestureRecognizer instance) {
-                                  instance.onTap = () => _infosAtoms(context);
-                                },
-                              )
-                            },
-                            child: ScenekitView(
-                              isAllowedToInteract: true,
-                              onScenekitViewCreated: onScenekitViewCreated,
-                            ),
+                        errorBuilder: (BuildContext context, Object exception,
+                            StackTrace? stackTrace) {
+                          return Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                height: 1,
+                                width: 1,
+                                child: ScenekitView(
+                                  isAllowedToInteract: true,
+                                  onScenekitViewCreated: onScenekitViewCreated,
+                                ),
+                              ),
+                              Center(
+                                child: AlertDialog(
+                                  title: const Text('⚠️'),
+                                  content: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: const <Widget>[
+                                      Text(
+                                        "Cette protéine n'est pas disponible 😢",
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          color: Colors.white,
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          );
+                        },
+                      ),
+                    )
+                  : Center(
+                      child: SizedBox(
+                        width: screenWidth,
+                        height: screenHeight * 0.5,
+                        child: RawGestureDetector(
+                          gestures: {
+                            AllowMultipleGestureRecognizer:
+                                GestureRecognizerFactoryWithHandlers<
+                                    AllowMultipleGestureRecognizer>(
+                              () => AllowMultipleGestureRecognizer(),
+                              (AllowMultipleGestureRecognizer instance) {
+                                instance.onTap = () => _infosAtoms(context);
+                              },
+                            )
+                          },
+                          child: ScenekitView(
+                            isAllowedToInteract: true,
+                            onScenekitViewCreated: onScenekitViewCreated,
                           ),
                         ),
                       ),
-              ),
+                    ),
             ),
       floatingActionButton: Column(
         mainAxisAlignment: MainAxisAlignment.end,
@@ -837,18 +877,10 @@ class _ScenekitPageState extends State<ScenekitPage>
           ),
           const SizedBox(height: 20),
           FloatingActionButton(
-            onPressed: () {
-              ShareFilesAndScreenshotWidgets().shareScreenshot(
-                previewContainer,
-                originalSize,
-                widget.name!,
-                "${widget.name}.png",
-                "image/png",
-                text: "Coucou, tu veux voir ma protéine ${widget.name} ?",
-              );
+            onPressed: () async {
+              _doTakeScreenshot();
             },
             heroTag: null,
-            //backgroundColor: Colors.black,
             child: const Icon(Icons.share_outlined),
           ),
           const SizedBox(height: 20),

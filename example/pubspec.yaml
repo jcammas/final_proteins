@@ -45,6 +45,9 @@ dependencies:
   flutter_processing: ^0.2.0
   local_auth: ^2.1.2
   flutter_launcher_icons: ^0.10.0
+  permission_handler: ^10.0.0
+  path_provider: ^2.0.11
+  google_fonts: ^3.0.1
 
 flutter_icons:
   android: "launcher_icon"
