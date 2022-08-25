@@ -827,7 +827,7 @@ class _ScenekitPageState extends State<ScenekitPage>
               });
             },
             heroTag: null,
-            backgroundColor: Colors.white,
+            //backgroundColor: Colors.black,
             child: Icon(() {
               if (customViewOpen == 1) {
                 return Icons.switch_right;
@@ -848,7 +848,7 @@ class _ScenekitPageState extends State<ScenekitPage>
               );
             },
             heroTag: null,
-            backgroundColor: Colors.white,
+            //backgroundColor: Colors.black,
             child: const Icon(Icons.share_outlined),
           ),
           const SizedBox(height: 20),
