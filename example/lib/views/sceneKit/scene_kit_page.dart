@@ -1,8 +1,9 @@
 // ignore_for_file: avoid_print, unused_local_variable, depend_on_referenced_packages
 
+import 'dart:convert';
 import 'dart:io';
 // import 'dart:typed_data';
-
+import 'package:http/http.dart' as http;
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:proteins_example/utils/palette.dart';
@@ -33,6 +34,48 @@ class _ScenekitPageState extends State<ScenekitPage>
   int customViewOpen = 0;
   bool isLoad = false;
   late Widget? _imgHolder;
+  bool isAvailable = false;
+
+  Future<void> openProtein(String text) async {
+    if (text.isNotEmpty) {
+      var failed = true;
+      try {
+        var url =
+            Uri.parse('https://files.rcsb.org/ligands/view/${text}_ideal.pdb');
+        http.Response response = await http.get(url);
+        if (response.statusCode == 200 && response.body.isNotEmpty) {
+          setState(() {
+            isAvailable = true;
+          });
+
+          return;
+        } else {
+          failed = true;
+        }
+      } catch (e) {
+        failed = true;
+      }
+      if (failed) {
+        Widget closeButton = TextButton(
+            child: const Text("Fermer"),
+            onPressed: () {
+              Navigator.of(context, rootNavigator: true).pop();
+            });
+        AlertDialog alert = AlertDialog(
+            title: const Text("Impossible de charger le ligand"),
+            content: const Text(
+                "Vérifier votre connexion à internet. Il est aussi possible que le ligand n'existe pas."),
+            actions: [
+              closeButton,
+            ]);
+        showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return alert;
+            });
+      }
+    }
+  }
 
   void showSnackBar(String message) {
     ScaffoldMessenger.of(context).showSnackBar(
@@ -70,6 +113,8 @@ class _ScenekitPageState extends State<ScenekitPage>
 
   @override
   void initState() {
+    // fetch3D(widget.name);
+    openProtein(widget.name);
     super.initState();
     _imgHolder = const Center(
       child: Icon(Icons.image),
@@ -856,25 +901,27 @@ class _ScenekitPageState extends State<ScenekitPage>
       floatingActionButton: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          FloatingActionButton(
-            onPressed: () {
-              setState(() {
-                if (customViewOpen == 0) {
-                  customViewOpen = 1;
-                } else {
-                  customViewOpen = 0;
-                }
-              });
-            },
-            heroTag: null,
-            //backgroundColor: Colors.black,
-            child: Icon(() {
-              if (customViewOpen == 1) {
-                return Icons.switch_right;
-              }
-              return Icons.switch_left;
-            }()),
-          ),
+          isAvailable
+              ? FloatingActionButton(
+                  onPressed: () {
+                    setState(() {
+                      if (customViewOpen == 0) {
+                        customViewOpen = 1;
+                      } else {
+                        customViewOpen = 0;
+                      }
+                    });
+                  },
+                  heroTag: null,
+                  //backgroundColor: Colors.black,
+                  child: Icon(() {
+                    if (customViewOpen == 1) {
+                      return Icons.switch_right;
+                    }
+                    return Icons.switch_left;
+                  }()),
+                )
+              : SizedBox(),
           const SizedBox(height: 20),
           FloatingActionButton(
             onPressed: () async {
